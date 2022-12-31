@@ -39,7 +39,7 @@ var array_slowed = [
 var midi = new Midi("pls.mid");
 var past = Math.floor(Math.random() * array.length);
 
-let currentNote = 0;
+let currentNoteIndex = 0;
 var direction_up = true;
 
 
