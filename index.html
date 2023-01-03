@@ -16,7 +16,8 @@
             // You can pass it to a callback function here.
 
             if (inputValue[inputValue.length - 1] != ' ') {
-                blues()
+                // blues()
+                playDreams()
             }
 
 
@@ -48,8 +49,56 @@
     let count = 0;
     let lickIndex = 0;
 
+
+    let octave = 6
+    let direction = 1
+
+
     const vol = new Tone.Volume(30).toDestination();
 
+    let notesg = ["C", "D", "E", "G"]
+
+
+    function playDreams() {
+
+
+        let poly = new Tone.PolySynth().toDestination();
+
+        var reverb = new Tone.Freeverb({
+            roomSize: 0.7,
+            dampening: 8000
+        });
+
+        poly.chain(reverb)
+
+
+
+        reverb.connect(poly); //to only add reverb, toggle the others off
+
+
+        let randNote = Math.floor(Math.random() * notesg.length);
+
+        console.log(randNote)
+
+
+
+    
+        if (Math.random(1) < 0.1) {
+            octave += direction
+        }
+        if (octave >= 6) {
+            direction = -1
+        }
+        if (octave <= 4) {
+            direction = 1
+            
+        }
+
+        poly.triggerAttackRelease(notesg[randNote] + octave, '0.1');
+
+        console.log(notesg[randNote] + octave)
+
+    }
 
     function getNumberFromEnd(str) {
         const match = str.match(/\d+$/);
@@ -384,7 +433,4 @@
 
 
     }
-
-
-
 </script>
